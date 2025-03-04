@@ -10,8 +10,8 @@ Go to the first commit and follow step by step the correction following commits.
 
 1. create a new `.NET` Solution.
 2. Add a .NET Class Library `Greetings` exposing one class `Greetings` with one async method `SayHi`.
-3. **Add an ASP .NET web API `Greetings.Api` with a endpoint `/hello-world` calling `SayHi`. <- YOU ARE HERE** ✅
-4. Make sure everything works with a little `curl`.
+3. Add an ASP .NET web API `Greetings.Api` with a endpoint `/hello-world` calling `SayHi`.
+4. **Make sure everything works with a little `curl`. <- YOU ARE HERE** ✅
 5. For the web API
     1. Instrument the ASP .NET framework for metrics.
     2. Add a custom metric on the `hello-world` endpoint.
@@ -24,13 +24,11 @@ Go to the first commit and follow step by step the correction following commits.
 
 ## Correction
 
-1. `dotnet new web -o Greetings.Api`
-2. `dotnet sln add Greetings.Api`
-3. `dotnet add Greetings.Api reference Greetings`
-4. Update `Program.cs` to follow specifications
+1. `dotnet run --project Greetings.Api`
+2. `curl localhost:<port>/hello-world`
 
 ## **Next commit**:
 
 ```bash
-git switch --detach hands-on-1~8
+git switch --detach hands-on-1~7
 ```
