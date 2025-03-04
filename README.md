@@ -8,8 +8,8 @@ Go to the first commit and follow step by step the correction following commits.
 
 ## Instructions
 
-1. **create a new `.NET` Solution. <- YOU ARE HERE** ✅
-2. Add a .NET Class Library `Greetings` exposing one class `Greetings` with one async method `SayHi`.
+1. create a new `.NET` Solution.
+2. **Add a .NET Class Library `Greetings` exposing one class `Greetings` with one async method `SayHi`. <- YOU ARE HERE** ✅
 3. Add an ASP .NET web API `Greetings.Api` with a endpoint `/hello-world` calling `SayHi`.
 4. Make sure everything works with a little `curl`.
 5. For the web API
@@ -24,11 +24,12 @@ Go to the first commit and follow step by step the correction following commits.
 
 ## Correction
 
-1. `dotnet new sln -o obs-102-1`.
-2. Add a `.gitignore` file for .NET projects.
+1. `dotnet new classlib -o Greetings`
+2. `dotnet sln add Greetings`
+3. Rename and update `Class1.cs` to follow specifications
 
 ## **Next commit**:
 
 ```bash
-git switch --detach hands-on-1~10
+git switch --detach hands-on-1~9
 ```
