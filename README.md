@@ -11,9 +11,9 @@ Go to the first commit and follow step by step the correction following commits.
 1. create a new `.NET` Solution.
 2. Add a .NET Class Library `Greetings` exposing one class `Greetings` with one async method `SayHi`.
 3. Add an ASP .NET web API `Greetings.Api` with a endpoint `/hello-world` calling `SayHi`.
-4. **Make sure everything works with a little `curl`. <- YOU ARE HERE** ✅
+4. Make sure everything works with a little `curl`.
 5. For the web API
-    1. Instrument the ASP .NET framework for metrics.
+    1. **Instrument the ASP .NET framework for metrics. <- YOU ARE HERE** ✅
     2. Add a custom metric on the `hello-world` endpoint.
     3. Instrument the ASP .NET framework for tracing.
     4. Add a custom span wrapping `SayHi` call.
@@ -24,11 +24,16 @@ Go to the first commit and follow step by step the correction following commits.
 
 ## Correction
 
-1. `dotnet run --project Greetings.Api`
-2. `curl localhost:<port>/hello-world`
+1. Follow [`opentelemetry-dotnet` - Metrics](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/README.md#getting-started-with-metrics) project documentation
+2. `dotnet add Greetings.Api package OpenTelemetry.Instrumentation.AspNetCore`
+3. `dotnet add Greetings.Api package OpenTelemetry.Extensions.Hosting`
+4. `dotnet add Greetings.Api package OpenTelemetry.Exporter.Console`
+5. Update `Program.cs` accordingly
+6. `dotnet run --project Greetings.Api`
+7. `curl localhost:<port>/hello-world` and watch the console!
 
 ## **Next commit**:
 
 ```bash
-git switch --detach hands-on-1~7
+git switch --detach hands-on-1~6
 ```
