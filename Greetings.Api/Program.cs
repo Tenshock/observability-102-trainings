@@ -7,6 +7,7 @@ using OpenTelemetry.Trace;
 var builder = WebApplication.CreateBuilder(args);
 
 builder
+    .Logging.ClearProviders()
     .Services.AddOpenTelemetry()
     .ConfigureResource(resource =>
         // Configures `service.name` OTL property. Try to change the service name value.

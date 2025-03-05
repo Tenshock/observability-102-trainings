@@ -18,20 +18,18 @@ Go to the first commit and follow step by step the correction following commits.
     3. Instrument the ASP .NET framework for tracing.
     4. Add a custom span wrapping `SayHi` call.
 6. For the Class Library
-    1. **Add one log on `SayHi` following the `ILogger` interface. Run the app, see the console output with your new log. <- YOU ARE HERE**
-    2. Disable the default Logger Providers in `Greetings.Api`. Run the app, it should work without logging spawning.
+    1. Add one log on `SayHi` following the `ILogger` interface. Run the app, see the console output with your new log.
+    2. **Disable the default Logger Providers in `Greetings.Api`. Run the app, it should work without logging spawning. <- YOU ARE HERE** ✅
     3. Configure an OTL Logger Provider, run the app and check the console.
 
 ## Correction
 
-1. In the `Greetings` package
-    1. Adds Microsoft Logging Abstractions Extensions: `dotnet add Greetings package Microsoft.Extensions.Logging.Abstractions`
-    2. implement logging following `ILogger` interface with DI
+1. In the `Greetings.Api` package, disable Logging Providers, see [Logging providers in .NET](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging-providers)
 2. `dotnet run --project Greetings.Api`
 3. `curl localhost:<port>/hello-world` and watch the console, you should see a log without more metadata.
 
 ## **Next commit**:
 
 ```bash
-git switch --detach hands-on-1~2
+git switch --detach hands-on-1~1
 ```
