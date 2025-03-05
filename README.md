@@ -15,8 +15,8 @@ Go to the first commit and follow step by step the correction following commits.
 5. For the web API
     1. Instrument the ASP .NET framework for metrics.
     2. Add a custom metric on the `hello-world` endpoint.
-    3. **Instrument the ASP .NET framework for tracing. <- YOU ARE HERE** ✅
-    4. Add a custom span wrapping `SayHi` call.
+    3. Instrument the ASP .NET framework for tracing.
+    4. **Add a custom span wrapping `SayHi` call. <- YOU ARE HERE** ✅
 6. For the Class Library
     1. Add one log on `SayHi` following the `ILogger` interface. Run the app, see the console output with your new log.
     2. Disable the default Logger Providers in `Greetings.Api`. Run the app, it should work without logging spawning.
@@ -24,14 +24,13 @@ Go to the first commit and follow step by step the correction following commits.
 
 ## Correction
 
-1. Follow [`opentelemetry-dotnet` - Traces](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main?tab=readme-ov-file#getting-started-with-tracing) project documentation
-2. `dotnet add Greetings.Api package`
+1. Follow [`opentelemetry-dotnet` - Tracing Console Application](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/docs/trace/getting-started-console/README.md) project documentation
 2. Update `Program.cs` accordingly
 3. `dotnet run --project Greetings.Api`
-4. `curl localhost:<port>/hello-world` and watch the console, try to find the ActivitySource.
+4. `curl localhost:<port>/hello-world` and watch the console, try to find the new ActivitySource.
 
 ## **Next commit**:
 
 ```bash
-git switch --detach hands-on-1~4
+git switch --detach hands-on-1~3
 ```

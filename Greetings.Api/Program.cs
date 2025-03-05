@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -33,6 +34,8 @@ builder
         tracing
             // Configures ASP .NET tracing instrumentation.
             .AddAspNetCoreInstrumentation()
+            // Adds our ActivitySource into OTL scope.
+            .AddSource("SRP.Greetings.Api")
             // Configures a Console Exporter.
             .AddConsoleExporter()
     );
@@ -50,7 +53,10 @@ app.MapGet(
 
         var greetings = new Greetings.Greetings();
 
-        return await greetings.SayHi();
+        using (var activity = Globals.GreetingsApiActivitySource.StartActivity("SayHi"))
+        {
+            return await greetings.SayHi();
+        }
     }
 );
 
@@ -76,4 +82,11 @@ public static class Globals
     /// </summary>
     public static readonly Counter<int> GreetingsCounterForEvenSeconds =
         TechnicalMeter.CreateCounter<int>("GreetingsCounterForEvenSeconds");
+
+    /// <summary>
+    /// An ActivitySource for the application scope.
+    /// </summary>
+    /// <see href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.activitysource?view=net-9.0" />
+    /// <see href="https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/docs/trace" />
+    public static readonly ActivitySource GreetingsApiActivitySource = new("SRP.Greetings.Api");
 }
