@@ -40,18 +40,19 @@ builder
             .AddConsoleExporter()
     );
 
+// Register Greetings class in the IoC Container with a Scoped lifetime.
+builder.Services.AddScoped<Greetings.Greetings>();
+
 var app = builder.Build();
 
 app.MapGet(
     "/hello-world",
-    async () =>
+    async (Greetings.Greetings greetings) =>
     {
         if (DateTime.Now.Second % 2 == 0)
         {
             Globals.GreetingsCounterForEvenSeconds.Add(1);
         }
-
-        var greetings = new Greetings.Greetings();
 
         using (var activity = Globals.GreetingsApiActivitySource.StartActivity("SayHi"))
         {
