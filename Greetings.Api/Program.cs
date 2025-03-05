@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -13,6 +14,8 @@ builder
         // Configures `service.name` OTL property. Try to change the service name value.
         resource.AddService(serviceName: builder.Environment.ApplicationName)
     )
+    // Adds OpenTelemetry Logging Provider
+    .WithLogging(logging => logging.AddConsoleExporter())
     // Adds OpenTelemetry Metrics Provider
     .WithMetrics(metrics =>
         metrics
