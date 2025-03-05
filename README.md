@@ -14,8 +14,8 @@ Go to the first commit and follow step by step the correction following commits.
 4. Make sure everything works with a little `curl`.
 5. For the web API
     1. Instrument the ASP .NET framework for metrics.
-    2. **Add a custom metric on the `hello-world` endpoint. <- YOU ARE HERE** ✅
-    3. Instrument the ASP .NET framework for tracing.
+    2. Add a custom metric on the `hello-world` endpoint.
+    3. **Instrument the ASP .NET framework for tracing. <- YOU ARE HERE** ✅
     4. Add a custom span wrapping `SayHi` call.
 6. For the Class Library
     1. Add one log on `SayHi` following the `ILogger` interface. Run the app, see the console output with your new log.
@@ -24,13 +24,14 @@ Go to the first commit and follow step by step the correction following commits.
 
 ## Correction
 
-1. Follow [`opentelemetry-dotnet` - Metrics Console Application](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/docs/metrics/getting-started-console/README.md) project documentation
+1. Follow [`opentelemetry-dotnet` - Traces](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main?tab=readme-ov-file#getting-started-with-tracing) project documentation
+2. `dotnet add Greetings.Api package`
 2. Update `Program.cs` accordingly
 3. `dotnet run --project Greetings.Api`
-4. `curl localhost:<port>/hello-world` and watch the console, try to find the new Counter.
+4. `curl localhost:<port>/hello-world` and watch the console, try to find the ActivitySource.
 
 ## **Next commit**:
 
 ```bash
-git switch --detach hands-on-1~5
+git switch --detach hands-on-1~4
 ```

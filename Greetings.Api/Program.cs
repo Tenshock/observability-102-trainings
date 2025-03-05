@@ -1,6 +1,7 @@
 using System.Diagnostics.Metrics;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,14 @@ builder
                         .ExportIntervalMilliseconds = 5000;
                 }
             )
+    )
+    // Adds OpenTelemetry Tracing Provider
+    .WithTracing(tracing =>
+        tracing
+            // Configures ASP .NET tracing instrumentation.
+            .AddAspNetCoreInstrumentation()
+            // Configures a Console Exporter.
+            .AddConsoleExporter()
     );
 
 var app = builder.Build();
