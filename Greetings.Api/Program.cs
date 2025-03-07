@@ -18,17 +18,21 @@ builder
         metrics
             .AddAspNetCoreInstrumentation()
             .AddMeter("SRP.Greetings.Api")
-            .AddConsoleExporter(
-                (_, metricReaderOptions) =>
-                {
-                    metricReaderOptions
-                        .PeriodicExportingMetricReaderOptions
-                        .ExportIntervalMilliseconds = 1000;
-                }
-            )
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri("http://localhost:4317");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+            })
     )
     .WithTracing(tracing =>
-        tracing.AddAspNetCoreInstrumentation().AddSource("SRP.Greetings.Api").AddConsoleExporter()
+        tracing
+            .AddAspNetCoreInstrumentation()
+            .AddSource("SRP.Greetings.Api")
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri("http://localhost:4317");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+            })
     );
 
 builder.Services.AddScoped<Greetings.Greetings>();

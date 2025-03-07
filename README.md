@@ -47,10 +47,8 @@ Try to call the `/hello-world` endpoint with:
 curl localhost:<port>/hello-world
 ```
 
-## Correction
-
-Go to
+> to come back to tip of the branch, run as following:
 ```bash
-git switch --detach hands-on-2~1
+git switch hands-on-2
 ```
-to see correction
+
